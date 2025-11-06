@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روابط المنح والمواقع المتطورة</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background: linear-gradient(to right, #f0f4f7, #d9e2ec); 
+            direction: rtl; 
+            padding: 30px; 
+            margin: 0;
+        } 
+        h2 { 
+            color: #333; 
+            margin-bottom: 20px; 
+        } 
+        .main-btn, .sub-btn { 
+            display: block; 
+            margin: 15px auto; 
+            padding: 12px 30px; 
+            font-size: 18px; 
+            border-radius: 12px; 
+            border: none; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            font-weight: bold; 
+        } 
+        .main-btn { 
+            background: linear-gradient(45deg, #4CAF50, #66BB6A); 
+            color: white; 
+            width: 80%;
+            max-width: 400px;
+        } 
+        .main-btn:hover { 
+            transform: translateY(-3px) scale(1.05); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
+        } 
+        .sub-btn { 
+            background: linear-gradient(45deg, #2196F3, #42A5F5); 
+            color: white; 
+            width: 60%; 
+            margin: 10px auto; 
+        } 
+        .sub-btn:hover { 
+            transform: translateY(-2px) scale(1.05); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+        } 
+        .sub-buttons { 
+            margin-top: 5px; 
+            display: none; 
+        }
+        #msg { 
+            margin-top: 15px; 
+            color: #1b5e20; 
+            font-weight: bold; 
+            font-size: 16px; 
+        }
+        #images { 
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        #images img { 
+            max-width: 200px; 
+            max-height: 150px;
+            border-radius: 10px; 
+            box-shadow: 0 0 10px #ccc; 
+            transition: transform 0.3s; 
+            object-fit: cover;
+            cursor: pointer;
+        } 
+        #images img:hover { 
+            transform: scale(1.1); 
+        }
+        .gallery-btn {
+            background: linear-gradient(45deg, #FF9800, #FFB74D);
+            color: white;
+            margin: 10px auto;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .gallery-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .links-section, .gallery-section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .reset-btn {
+            background: linear-gradient(45deg, #9C27B0, #BA68C8);
+            color: white;
+            margin: 20px auto;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .no-images {
+            color: #666;
+            font-style: italic;
+            margin: 20px 0;
+        }
+        
+        /* نافذة الصورة المكبرة */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 2%;
+            border-radius: 10px;
+            animation: zoomIn 0.3s;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .close:hover {
+            color: #bbb;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>روابط المنح والمواقع المتطورة</h2>
+        
+        <div class="links-section">
+            <!-- الأزرار الرئيسية -->
+            <button class="main-btn" onclick="showOnlyThis(1)">1 - رابط موقع اختصار الروابط</button>
+            <div class="sub-buttons" id="sub-buttons-1">
+                <button class="sub-btn" onclick="copyLink('https://short.link/example1')">نسخ الرابط</button>
+                <button class="gallery-btn" onclick="showImages(1)">عرض الصور المرتبطة</button>
+            </div>
+
+            <button class="main-btn" onclick="showOnlyThis(2)">2 - منحة طلاب مدارس مختصر</button>
+            <div class="sub-buttons" id="sub-buttons-2">
+                <button class="sub-btn" onclick="copyLink('https://scholarship.edu/students')">نسخ الرابط</button>
+                <button class="gallery-btn" onclick="showImages(2)">عرض الصور المرتبطة</button>
+            </div>
+
+            <button class="main-btn" onclick="showOnlyThis(3)">3 - منحة تعليم أخلاقي للعراق</button>
+            <div class="sub-buttons" id="sub-buttons-3">
+                <button class="sub-btn" onclick="copyLink('https://ethics.edu/iraq')">نسخ الرابط</button>
+                <button class="gallery-btn" onclick="showImages(3)">عرض الصور المرتبطة</button>
+            </div>
+
+            <button class="main-btn" onclick="showOnlyThis(4)">4 - منحة مدارس</button>
+            <div class="sub-buttons" id="sub-buttons-4">
+                <button class="sub-btn" onclick="copyLink('https://schools.edu/scholarship')">نسخ الرابط</button>
+                <button class="gallery-btn" onclick="showImages(4)">عرض الصور المرتبطة</button>
+            </div>
+
+            <button class="main-btn" onclick="showOnlyThis(5)">5 - ببجي</button>
+            <div class="sub-buttons" id="sub-buttons-5">
+                <button class="sub-btn" onclick="copyLink('https://pubg.mobile/game')">نسخ الرابط</button>
+                <button class="gallery-btn" onclick="showImages(5)">عرض الصور المرتبطة</button>
+            </div>
+
+            <button class="main-btn" onclick="showOnlyThis(6)">6 - منحة طلاب مدارس بصورة أجمل 👍</button>
+            <div class="sub-buttons" id="sub-buttons-6">
+                <button class="sub-btn" onclick="copyLink('https://beautiful.edu/scholarship')">نسخ الرابط</button>
+                <button class="gallery-btn" onclick="showImages(6)">عرض الصور المرتبطة</button>
+            </div>
+
+            <button class="main-btn" onclick="showOnlyThis(7)">7 - طلاب كلية جديد</button>
+            <div class="sub-buttons" id="sub-buttons-7">
+                <button class="sub-btn" onclick="copyLink('https://college.edu/new')">نسخ الرابط</button>
+                <button class="gallery-btn" onclick="showImages(7)">عرض الصور المرتبطة</button>
+            </div>
+
+            <div id="msg"></div>
+            
+            <button class="reset-btn" onclick="resetView()">إعادة ضبط العرض</button>
+        </div>
+
+        <div class="gallery-section">
+            <h2>معرض الصور</h2>
+            <div id="images"></div>
+        </div>
+    </div>
+
+    <!-- نافذة الصورة المكبرة -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+
+    <script>
+        // جميع الصور المتوفرة في مجلد photoa
+        const allImages = [
+            "1.png", "2.png", "3.png", "3a.png", "3b.png", "3c.png", 
+            "5.png", "5a.png"
+        ];
+
+        // عند الضغط على زر رئيسي، إظهار أزراره فقط وإخفاء كل الأزرار الأخرى
+        function showOnlyThis(id) {
+            const allMainBtns = document.querySelectorAll('.main-btn');
+            const allSubBtns = document.querySelectorAll('.sub-buttons');
+            
+            allMainBtns.forEach((btn, index) => {
+                if(index === id - 1) {
+                    btn.style.display = 'block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+            
+            allSubBtns.forEach((div, index) => {
+                if(index === id - 1) {
+                    div.style.display = 'block';
+                } else {
+                    div.style.display = 'none';
+                }
+            });
+            
+            // إخفاء معرض الصور عند الضغط على زر رئيسي جديد
+            document.getElementById('images').innerHTML = "";
+            document.getElementById('msg').textContent = "";
+        }
+
+        // نسخ الرابط
+        function copyLink(link) {
+            navigator.clipboard.writeText(link).then(() => {
+                const msg = document.getElementById('msg');
+                msg.textContent = '✅ تم نسخ الرابط: ' + link;
+                setTimeout(() => msg.textContent = '', 2000);
+            });
+        }
+
+        // عرض الصور المرتبطة بكل زر رئيسي حسب التوزيع الجديد
+        function showImages(buttonId) {
+            const container = document.getElementById('images');
+            container.innerHTML = "";
+            
+            // تحديد الصور المرتبطة بكل زر حسب التوزيع المطلوب
+            const imageSets = {
+                1: [], // لا يحتوي صور
+                2: ["1.png"], // فقط الصورة 1.png
+                3: ["2.png"], // فقط الصورة 2.png
+                4: ["3.png", "3a.png", "3b.png", "3c.png"], // مجموعة الصور 3
+                5: [], // لا يحتوي صور
+                6: ["5.png", "5a.png"], // مجموعة الصور 5
+                7: [] // لا يحتوي صور
+            };
+            
+            // الحصول على الصور المرتبطة بالزر المحدد
+            const images = imageSets[buttonId] || [];
+            
+            // إنشاء الصور وإضافتها
+            images.forEach(name => {
+                const img = document.createElement('img');
+                img.src = "photoa/" + name;
+                img.alt = name;
+                img.title = "انقر لتكبير الصورة";
+                img.onclick = function() {
+                    openModal(this.src);
+                };
+                container.appendChild(img);
+            });
+            
+            // عرض رسالة إذا لم تكن هناك صور
+            if (images.length === 0) {
+                container.innerHTML = "<p class='no-images'>لا توجد صور مرتبطة بهذا الرابط</p>";
+            }
+            
+            // عرض رسالة تأكيد
+            const msg = document.getElementById('msg');
+            if (images.length > 0) {
+                msg.textContent = `📸 عرض ${images.length} صورة مرتبطة بالرابط - انقر على الصورة لتكبيرها`;
+            } else {
+                msg.textContent = "ℹ️ لا توجد صور مرتبطة بهذا الرابط";
+            }
+            setTimeout(() => msg.textContent = '', 3000);
+        }
+
+        // فتح الصورة في نافذة مكبرة
+        function openModal(src) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("expandedImg");
+            modal.style.display = "block";
+            modalImg.src = src;
+        }
+
+        // إغلاق نافذة الصورة المكبرة
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        // إغلاق النافذة عند النقر خارج الصورة
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // إعادة ضبط العرض لعرض جميع الأزرار
+        function resetView() {
+            const allMainBtns = document.querySelectorAll('.main-btn');
+            const allSubBtns = document.querySelectorAll('.sub-buttons');
+            
+            allMainBtns.forEach(btn => {
+                btn.style.display = 'block';
+            });
+            
+            allSubBtns.forEach(div => {
+                div.style.display = 'none';
+            });
+            
+            document.getElementById('images').innerHTML = "";
+            document.getElementById('msg').textContent = "تم إعادة ضبط العرض";
+            setTimeout(() => document.getElementById('msg').textContent = '', 2000);
+        }
+
+        // عرض جميع الصور عند تحميل الصفحة لأول مرة
+        window.onload = function() {
+            const container = document.getElementById('images');
+            container.innerHTML = "";
+            
+            allImages.forEach(name => {
+                const img = document.createElement('img');
+                img.src = "photoa/" + name;
+                img.alt = name;
+                img.title = "انقر لتكبير الصورة";
+                img.onclick = function() {
+                    openModal(this.src);
+                };
+                container.appendChild(img);
+            });
+        };
+    </script>
+</body>
+</html>
